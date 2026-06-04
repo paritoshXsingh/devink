@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import fs from "fs";
+import imagekit from "../configs/imageKit.js";
+import Blog from "../models/Blog.js";
 
 //Register User
 export const registerUser = async (req, res) => {
@@ -120,12 +123,75 @@ export const loginUser = async (req, res) => {
 //Get Profile
 export const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.userId)
-      .select("-password");
+    const user = await User.findById(req.userId).select("-password");
 
     res.json({
       success: true,
       user,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+//create-blog
+export const createUserBlog = async (req, res) => {
+  try {
+    const { title, subTitle, description, category } = JSON.parse(
+      req.body.blog,
+    );
+
+    const imageFile = req.file;
+
+    if (!title || !description || !category || !imageFile) {
+      return res.json({
+        success: false,
+        message: "Missing required fields",
+      });
+    }
+
+    const fileBuffer = fs.readFileSync(imageFile.path);
+
+    const response = await imagekit.upload({
+      file: fileBuffer,
+      fileName: imageFile.originalname,
+      folder: "/blogs",
+    });
+
+    const optimizedImageUrl = imagekit.url({
+      path: response.filePath,
+      transformation: [
+        { quality: "auto" },
+        { format: "webp" },
+        { width: "1280" },
+      ],
+    });
+
+    const slug = title.toLowerCase().trim().replace(/\s+/g, "-");
+
+    const blog = await Blog.create({
+      title,
+      subTitle,
+      description,
+      category,
+      image: optimizedImageUrl,
+
+      slug,
+
+      author: req.userId,
+
+      status: "draft",
+
+      isPublished: false,
+    });
+
+    res.json({
+      success: true,
+      message: "Draft created successfully",
+      blog,
     });
   } catch (error) {
     res.json({

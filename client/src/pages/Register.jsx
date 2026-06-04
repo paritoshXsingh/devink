@@ -17,21 +17,16 @@ const Register = () => {
     try {
       setLoading(true);
 
-      const { data } = await axios.post(
-        "/api/user/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post("/api/user/register", {
+        name,
+        email,
+        password,
+      });
 
       if (data.success) {
         localStorage.setItem("token", data.token);
 
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = data.token;
+        axios.defaults.headers.common["Authorization"] = data.token;
 
         setToken(data.token);
 
@@ -51,44 +46,82 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="min-h-screen flex items-center justify-center bg-primary/3 px-4">
+      <div className="w-full max-w-md bg-white border border-primary/20 rounded-xl shadow-xl shadow-primary/10 p-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Join <span className="text-primary">DevInk</span>
+          </h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
-        />
+          <p className="text-gray-500 mt-2">
+            Create your account and start publishing articles.
+          </p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Name
+            </label>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-primary"
+            />
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-        />
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Email
+            </label>
 
-        <button
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Creating..." : "Register"}
-        </button>
-      </form>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-primary"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-primary"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition"
+          >
+            {loading ? "Creating account..." : "Create Account"}
+          </button>
+
+          <p className="text-center text-sm text-gray-500">
+            Already have an account?
+            <span
+              onClick={() => navigate("/login")}
+              className="ml-1 text-primary cursor-pointer hover:underline"
+            >
+              Login
+            </span>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

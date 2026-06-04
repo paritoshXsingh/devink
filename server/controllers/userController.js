@@ -200,3 +200,90 @@ export const createUserBlog = async (req, res) => {
     });
   }
 };
+
+
+//getMyBlogs
+export const getMyBlogs = async (req, res) => {
+  try {
+    const blogs = await Blog.find({
+      author: req.userId,
+    }).sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      blogs,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+//publish Blog
+export const publishBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const blog = await Blog.findOne({
+      _id: id,
+      author: req.userId,
+    });
+
+    if (!blog) {
+      return res.json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+
+    blog.status = "published";
+    blog.isPublished = true;
+
+    await blog.save();
+
+    res.json({
+      success: true,
+      message: "Blog published successfully",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+//Delete Blogs
+export const deleteBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const blog = await Blog.findOne({
+      _id: id,
+      author: req.userId,
+    });
+
+    if (!blog) {
+      return res.json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+
+    await Blog.findByIdAndDelete(id);
+
+    res.json({
+      success: true,
+      message: "Blog deleted successfully",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

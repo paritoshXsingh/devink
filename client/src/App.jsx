@@ -10,6 +10,9 @@ import AddBlog from "./pages/admin/AddBlog";
 import ListBlog from "./pages/admin/ListBlog";
 import Comments from "./pages/admin/Comments";
 import AdminLogin from "./components/admin/Login";
+import DashboardLayout from "./pages/dashboard/DashboardLayout";
+import MyArticles from "./pages/dashboard/MyArticles";
+import CreateArticle from "./pages/dashboard/CreateArticle";
 import "quill/dist/quill.snow.css";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
@@ -30,6 +33,13 @@ const App = () => {
           <Route path="addBlog" element={<AddBlog />} />
           <Route path="listBlog" element={<ListBlog />} />
           <Route path="comments" element={<Comments />} />
+        </Route>
+        <Route
+          path="/dashboard"
+          element={token ? <DashboardLayout /> : <Login />}
+        >
+          <Route index element={<MyArticles />} />
+          <Route path="create" element={<CreateArticle />} />
         </Route>
       </Routes>
     </div>

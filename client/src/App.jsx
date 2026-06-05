@@ -18,7 +18,7 @@ import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
 
 const App = () => {
-  const { token } = useAppContext();
+  const { token, user } = useAppContext();
 
   return (
     <div>
@@ -28,7 +28,12 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/blog/:id" element={<Blog />} />
-        <Route path="/admin" element={token ? <Layout /> : <AdminLogin />}>
+        <Route
+          path="/admin"
+          element={
+            token && user?.role === "admin" ? <Layout /> : <AdminLogin />
+          }
+        >
           <Route index element={<Dashboard />} />
           <Route path="addBlog" element={<AddBlog />} />
           <Route path="listBlog" element={<ListBlog />} />

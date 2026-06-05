@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+import { blogCategories } from "../../assets/assets";
 
 const CreateArticle = () => {
   const { axios, navigate } = useAppContext();
@@ -119,10 +120,13 @@ const CreateArticle = () => {
               onChange={(e) => setCategory(e.target.value)}
               className="w-full border border-gray-300 rounded-lg p-3 outline-none focus:border-primary"
             >
-              <option>Technology</option>
-              <option>Programming</option>
-              <option>AI</option>
-              <option>Web Development</option>
+              {blogCategories
+                .filter((cat) => cat !== "All")
+                .map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
             </select>
           </div>
 

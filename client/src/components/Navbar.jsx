@@ -12,7 +12,7 @@ const Navbar = () => {
           onClick={() => navigate("/")}
           src={assets.logo}
           alt="logo"
-          className="w-32 sm:w-44 cursor-pointer"
+          className="h-10 sm:h-12 w-auto cursor-pointer"
         />
 
         {token && user ? (

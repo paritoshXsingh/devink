@@ -153,3 +153,23 @@ export const generateContent = async (req, res) => {
     });
   }
 };
+
+//increment views
+export const incrementViews = async (req, res) => {
+  try {
+    const { blogId } = req.params;
+
+    await Blog.findByIdAndUpdate(blogId, {
+      $inc: { views: 1 },
+    });
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

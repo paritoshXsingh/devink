@@ -23,6 +23,14 @@ const Navbar = () => {
             >
               Dashboard
             </button>
+            {user.role === "admin" && (
+              <button
+                onClick={() => navigate("/admin")}
+                className="px-5 py-2 rounded-full border border-green-600 text-green-600 hover:bg-green-50 transition"
+              >
+                Admin
+              </button>
+            )}
 
             <p className="font-medium text-gray-700">Hello, {user.name}</p>
 

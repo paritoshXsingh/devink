@@ -145,6 +145,11 @@ export const generateContent = async (req, res) => {
     );
     res.json({ success: true, content });
   } catch (error) {
-    res.json({ success: false, message: error.message });
+    console.error("Gemini Error:", error);
+
+    res.json({
+      success: false,
+      message: "AI service temporarily unavailable. Please try again later.",
+    });
   }
 };

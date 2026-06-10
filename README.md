@@ -1,100 +1,125 @@
 # DevInk
 
-DevInk is the transformation workspace for a full-stack publishing platform focused on developer writing and AI-assisted drafting.
+A developer-focused blogging platform built with the MERN stack that enables users to write, manage, and publish articles through a streamlined content creation workflow.
 
-This codebase started from a purchased blog CMS starter and is being rebuilt into an original product with:
+DevInk provides authentication, draft management, article publishing, category-based organization, search functionality, and AI-assisted writing support.
 
-- a distinct product identity
-- stronger authentication and authorization
-- multi-author publishing workflows
-- safer content handling
-- portfolio-ready documentation and deployment
+## Live Demo
 
-## Stack
+Frontend: https://devink-xi.vercel.app
 
-- React + Vite + Tailwind on the client
-- Express + MongoDB on the server
-- ImageKit for image uploads
-- Gemini for AI-assisted content generation
+## Features
 
-## Baseline
+### Authentication & Authorization
 
-What exists in the current base:
+* JWT Authentication
+* Secure Login & Registration
+* Protected Routes
+* User Session Management
 
-- Public blog listing and blog detail pages
-- Category filtering and text search on the frontend
-- Admin login with JWT token
-- Admin dashboard with blog and comment management
-- Blog creation with rich text editor and image upload
-- AI-generated draft content from a title prompt
-- Comment submission with admin approval flow
+### Content Management
 
-## Product Direction
+* Create Articles
+* Save Drafts
+* Publish Articles
+* Delete Articles
+* Manage Personal Content
 
-DevInk is being shaped into a **multi-author developer publishing platform**.
+### Discovery & Search
 
-Target capabilities:
+* Search Articles
+* Browse by Category
+* Filter Content
+* Responsive Content Feed
 
-- user signup, login, logout, and profile management
-- role-based authorization for authors and admins
-- author-owned draft and publishing workflows
-- public article discovery with stronger search and filtering
-- logged-in commenting with moderation
-- AI-assisted outlining, drafting, and summaries
+### AI-Assisted Writing
 
-## Current Gaps
+* AI Writing Assistance
+* Content Drafting Support
+* Improved Writing Workflow
 
-What still needs to change:
+### Dashboard
 
-- Single admin login only, no real user accounts
-- No role-based authorization beyond admin token verification
-- Tutorial-era branding and placeholder content are still being removed
-- Newsletter and share actions are UI-only
-- Content sanitization and validation are incomplete
-- Limited testing and deployment documentation
+* Article Management Dashboard
+* Draft Tracking
+* Publishing Workflow
+* Author Controls
 
-## Phase Plan
+## Screenshots
 
-### Phase 0: Baseline and Repo Setup
+### Homepage
 
-- Create a clean git history
-- Remove tutorial fingerprints
-- Add project documentation
-- Define product identity and naming
+Explore published content, search articles, and browse categories.
 
-### Phase 1: Product Rebrand
+<img src="assets/DevinkHome.png" width="900"/>
 
-- Rename app and replace branding
-- Rewrite copy and product messaging
-- Redesign key public-facing pages
+### Logged-In Experience
 
-### Phase 2: Auth and Authorization
+Personalized homepage with dashboard access and publishing controls.
 
-- Add real user accounts
-- Add password hashing and JWT expiry
-- Add role and ownership checks
-- Protect client and server routes
+<img src="assets/DevinkHomeLoggedIn.png" width="900"/>
 
-### Phase 3: Core Product Features
+### Create Article
 
-- Multi-author posts
-- Draft/publish workflow
-- Author profiles
-- Slug-based routing
-- Real comment ownership and moderation
+Write and structure new articles with category selection and content management.
 
-### Phase 4: Quality and Deployment
+<img src="assets/Publish.png" width="900"/>
 
-- Validation and sanitization
-- Tests for critical flows
-- Deployment setup
-- Portfolio-ready README and screenshots
+### Cover Image Preview
 
-## Working Notes
+Preview uploaded cover images before publishing.
 
-Daily progress is tracked around:
+<img src="assets/add.png" width="900"/>
 
-- What changed
-- What is complete
-- What is blocked
-- What is next
+### Draft & Publishing Workflow
+
+Manage drafts and publish articles directly from the dashboard.
+
+<img src="assets/put.png" width="900"/>
+
+## Tech Stack
+
+### Frontend
+
+* React
+* React Router
+* Bootstrap
+* Axios
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB Atlas
+* Mongoose
+
+### Authentication
+
+* JWT
+* bcrypt
+
+### Storage
+
+* Cloudinary (if used)
+* Image Upload Support
+
+## Project Structure
+
+frontend/
+server/
+assets/
+
+## Future Improvements
+
+* Comments System
+* User Profiles
+* Bookmarks
+* Newsletter Subscription
+* Article Analytics
+* Rich Text Editor
+
+## Author
+
+Paritosh Singh
+
+Full Stack MERN Developer
